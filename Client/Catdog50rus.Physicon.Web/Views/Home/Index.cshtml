@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CourseTreeModel>
+
+<div class="container" >
+    <div class="row">
+        <div class="col">
+            <h3>Список курсов</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form asp-action="Index" method="get">
+                <div class="form-group form-row">
+                    <div class="col">
+                        <label>Выберете предмет</label>
+                        <select asp-items="@ViewBag.Subject" class="form-control" onchange="chTree()" id="subject">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Выберете класс</label>
+                        <select class="form-control" asp-items="@ViewBag.Grade" id="grade" onchange="chTree()">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Выберете тип учебника</label>
+                        <select class="form-control" asp-items="@ViewBag.Genre" id="genre" onchange="chTree()">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                @foreach (var course in Model)
+                {
+                    @if (course.Order==0)
+                    {
+                        <h5>@course.Course</h5>
+                    }
+
+                    <div>
+                        <ul>
+                            <li>@course.Num <span>@course.Title</span></li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
